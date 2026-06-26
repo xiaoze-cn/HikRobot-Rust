@@ -1,0 +1,7 @@
+[package]
+name = "hikrobot"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+hikrobot-sys = { path = "../hikrobot-sys" }
