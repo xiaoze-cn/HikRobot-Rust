@@ -2,6 +2,46 @@
 
 HikRobot MVS 相机 SDK 的 Rust 封装。
 
+## 示例
+
+```rust
+use std::time::Duration;
+use hikrobot::{HikRobot, Rotation};
+
+const IMAGE_PATH: &str = "image.bmp";
+const TIMEOUT: Duration = Duration::from_secs(1);
+
+fn main() -> hikrobot::Result<()> {
+    let hik = HikRobot::new()?;
+
+    let devices = hik.devices()?;
+    let device = devices.default()?;
+    let mut camera = device.open()?;
+    camera.set_exposure(8000.0)?;
+    camera.set_gain(3.0)?;
+
+    let mut stream = camera.stream()?;
+    let frame = stream.take_frame(TIMEOUT)?;
+    let frame = stream.rotate_frame(&frame, Rotation::Angle180)?;
+
+    let mut output = stream.save_image(IMAGE_PATH)?;
+    output.write_frame(&frame)?;
+    output.finish()?;
+
+    println!(
+        "captured image: {}x{}, {} bytes",
+        frame.info.width,
+        frame.info.height,
+        frame.data.len()
+    );
+
+    let camera = stream.stop()?;
+    camera.close()?;
+
+    Ok(())
+}
+```
+
 ## 项目结构
 
 ```text
