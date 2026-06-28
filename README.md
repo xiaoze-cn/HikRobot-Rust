@@ -1,6 +1,17 @@
 ﻿# HikRobot
 
-HikRobot MVS 相机 SDK 的 Rust 封装。
+HikRobot MVS 相机 SDK 的 Rust 封装
+
+本项目基于 HikRobot MVS 5.0.1 Build 20260512（工业相机 SDK 4.8.0.3 Build 20260512）开发
+
+使用前需要安装 HikRobot MVS，并确保相机驱动和运行时环境可用
+
+## 安装
+
+```toml
+[dependencies]
+hikrobot = { git = "https://github.com/xiaoze-cn/HikRobot-Rust.git" }
+```
 
 ## 示例
 
@@ -80,3 +91,7 @@ HikRobot/
 - `docs/rust-sdk/device.md`：设备枚举和设备信息
 - `docs/rust-sdk/camera.md`：相机控制、取流、图像处理、录像
 - `docs/rust-sdk/error.md`：统一错误类型和 C SDK 返回码翻译
+
+## 协议
+
+本项目中的 Rust 封装代码使用 MIT 协议，HikRobot MVS SDK 相关文件仍受其原始许可条款约束
